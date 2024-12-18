@@ -57,7 +57,8 @@ function updateCharacterCount(inputId, counterId, maxLength) {
     
     input.on('input', () => {
         const length = input.val().length;
-        counter.text(`${length}/${maxLength}`);
+        const nokori = maxLength-length;
+        counter.text(`${nokori}`);
     
         if (length > maxLength) {
             counter.addClass('error');
@@ -156,7 +157,7 @@ function formatTimestamp(timestamp) {
     if (funsa < 1){
         return 'たった今';  //1分経ってない
     } else if (jisa < 1){
-        return `${Math.floor(funsa)}分前`
+        return `${Math.floor(funsa)}分前` //1時間経ってない
     } else if (nitisa < 1){
         return `${Math.floor(jisa)}時間前`
     } else if(shusa < 1){
