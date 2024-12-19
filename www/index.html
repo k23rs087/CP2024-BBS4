@@ -57,8 +57,8 @@ function updateCharacterCount(inputId, counterId, maxLength) {
     
     input.on('input', () => {
         const length = input.val().length;
-        const nokori = maxLength-length;
-        counter.text(`${nokori}`); //残りの文字表示
+        const lengthLeft = maxLength-length;
+        counter.text(`${lengthLeft}`); //残りの文字表示
     
         if (length > maxLength) {
             counter.addClass('error');
@@ -147,23 +147,23 @@ function escapeHtml(str) {
 function formatTimestamp(timestamp) {
     const now = new Date();
     const date = new Date(timestamp);
-    const milibyousa = now - date;
-    const byousa = milibyousa/1000;
-    const funsa = byousa/60;
-    const jisa = funsa/60;
-    const nitisa = jisa/24;
-    const shusa = nitisa/7;
-    const tukisa = nitisa/30;
-    if (funsa < 1){
+    const miliSec = now - date;
+    const seconds = miliSec/1000;
+    const minutes = seconds/60;
+    const hours = minutes/60;
+    const days = hours/24;
+    const weeks = days/7;
+    const months = days/30;
+    if (seconds < 1){
         return 'たった今';  //1分経ってない
-    } else if (jisa < 1){
-        return `${Math.floor(funsa)}分前` //1時間経ってない
-    } else if (nitisa < 1){
-        return `${Math.floor(jisa)}時間前`  //1日経ってない
-    } else if(shusa < 1){
-        return `${Math.floor(nitisa)}日前`; //1週間たってない
-    } else if(tukisa < 1){
-        return `${Math.floor(shusa)}週間前`; //1カ月たってない
+    } else if (hours < 1){
+        return `${Math.floor(minutes)}分前` //1時間経ってない
+    } else if (days < 1){
+        return `${Math.floor(hours)}時間前`  //1日経ってない
+    } else if(weeks < 1){
+        return `${Math.floor(days)}日前`; //1週間たってない
+    } else if(months < 1){
+        return `${Math.floor(weeks)}週間前`; //1カ月たってない
     } else {
         return date.toLocaleString('ja-JP', {
             year: 'numeric',
